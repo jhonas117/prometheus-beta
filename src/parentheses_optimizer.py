@@ -23,9 +23,19 @@ def max_balanced_parentheses_pairs(s: str) -> int:
     if not isinstance(s, str):
         raise TypeError("Input must be a string")
     
-    # Count open and close parentheses
-    open_count = s.count('(')
-    close_count = s.count(')')
+    # Remove non-parentheses characters
+    parentheses = [char for char in s if char in '()']
     
-    # Maximum balanced pairs is the minimum of open and close parentheses
-    return min(open_count, close_count)
+    # Use greedy algorithm to maximize balanced pairs
+    open_count = 0
+    balanced_pairs = 0
+    
+    for char in parentheses:
+        if char == '(':
+            open_count += 1
+        elif char == ')' and open_count > 0:
+            # Matching close parenthesis found
+            open_count -= 1
+            balanced_pairs += 1
+    
+    return balanced_pairs
