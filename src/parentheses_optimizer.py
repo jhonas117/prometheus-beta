@@ -26,19 +26,9 @@ def max_balanced_parentheses_pairs(s: str) -> int:
     # Remove non-parentheses characters
     parentheses = [char for char in s if char in '()']
     
-    # Greedy algorithm to maximize balanced pairs
-    balanced_pairs = 0
-    stack = []
+    # Count total open and close parentheses
+    open_count = parentheses.count('(')
+    close_count = parentheses.count(')')
     
-    for char in parentheses:
-        if char == '(':
-            # Open parenthesis, push to stack
-            stack.append(char)
-        elif char == ')':
-            # Close parenthesis 
-            if stack:
-                # Match and remove the last open parenthesis
-                stack.pop()
-                balanced_pairs += 1
-    
-    return balanced_pairs
+    # Maximize balanced pairs
+    return min(open_count, close_count)
