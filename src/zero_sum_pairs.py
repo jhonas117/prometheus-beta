@@ -23,15 +23,17 @@ def count_zero_sum_pairs(numbers):
     if len(numbers) < 2:
         return 0
     
-    # Use a set for O(n) time complexity
+    # Count pairs with a dictionary to handle multiple instances
     pair_count = 0
-    seen = set()
+    num_counts = {}
     
     for num in numbers:
-        # Check if the negative of the current number exists in seen
-        if -num in seen:
+        # Check if the negative of the current number exists
+        if -num in num_counts and num_counts[-num] > 0:
             pair_count += 1
-        # Add current number to seen set
-        seen.add(num)
+            num_counts[-num] -= 1
+        
+        # Increment the count of the current number
+        num_counts[num] = num_counts.get(num, 0) + 1
     
     return pair_count
