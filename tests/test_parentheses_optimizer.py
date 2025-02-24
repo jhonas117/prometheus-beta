@@ -9,7 +9,7 @@ def test_max_balanced_parentheses_pairs_basic():
 
 def test_max_balanced_parentheses_pairs_unbalanced():
     """Test unbalanced parentheses scenarios."""
-    assert max_balanced_parentheses_pairs("()))(()") == 2  # 2 pairs (not 3)
+    assert max_balanced_parentheses_pairs("()))(()") == 2  # Specifically expect 2
     assert max_balanced_parentheses_pairs("(((()))") == 3
     assert max_balanced_parentheses_pairs("))((") == 2  # Can be rearranged
 
