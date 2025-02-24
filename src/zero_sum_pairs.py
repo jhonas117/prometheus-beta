@@ -23,26 +23,22 @@ def count_zero_sum_pairs(numbers):
     if len(numbers) < 2:
         return 0
     
-    # Special handling for zero elements
-    zero_count = numbers.count(0)
-    zero_pairs = (zero_count * (zero_count - 1)) // 2
-    
-    # Count non-zero pairs
-    non_zero_pairs = 0
-    seen = set()
-    processed = set()
+    # Use a counting method to track pairs
+    pair_count = 0
+    num_counts = {}
     
     for num in numbers:
-        # Skip zero elements
+        # Handle zero separately
         if num == 0:
-            continue
+            pair_count += num_counts.get(0, 0)
+            num_counts[0] = num_counts.get(0, 0) + 1
+        else:
+            # Check if the negative exists
+            complement = -num
+            if complement in num_counts and num_counts[complement] > 0:
+                pair_count += 1
         
-        # Check if the negative of the current number exists
-        if -num in seen and num not in processed:
-            non_zero_pairs += 1
-            processed.add(num)
-            processed.add(-num)
-        
-        seen.add(num)
+            # Add current number to counts
+            num_counts[num] = num_counts.get(num, 0) + 1
     
-    return zero_pairs + non_zero_pairs
+    return pair_count
