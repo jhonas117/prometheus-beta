@@ -6,7 +6,7 @@ def test_suffix_tree_creation():
     text = "banana"
     suffix_tree = SuffixTree(text)
     assert suffix_tree.text == "banana$"
-    assert suffix_tree.root is not None
+    assert len(suffix_tree.suffix_indices) > 0
 
 def test_empty_text_raises_error():
     """Test that empty text raises a ValueError."""
